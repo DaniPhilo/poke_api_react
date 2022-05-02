@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import Form from './Form'
+import List from './List'
 
 function App() {
+
+  const [value, setValue] = useState('');
+  const [pokemons, setPokemons] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main>
+      <Form value={value} setValue={setValue} pokemons={pokemons} setPokemons={setPokemons} />
+      <List pokemons={pokemons} />
+    </main>
+  )
 }
 
-export default App;
+export default App
