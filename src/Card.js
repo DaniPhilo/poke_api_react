@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function Card({ pokemon }) {
 
-    const [data, setData] = useState('');
+    const data = {
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.sprites.front_default,
+        types: pokemon.types
+    }
 
-    useEffect(() => {
-        const fetchPokemon = async () => {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-            const data = await response.json();
-            const filteredData = { id: data.id, name: data.name, url: data.sprites.front_default, type: data.types[0].type.name }
-            setData(filteredData);
-        }
-        fetchPokemon();
-    }, []);
+    const typeTwo = pokemon.types[1] ? pokemon.types[1].type.name : null;
 
     return (
         <div>
-            <img src={data.url} alt="" />
-            <h4>#{data.id} {data.name}</h4>
-            <p>Type: {data.type}</p>
+            <h4>
+                #{data.id} 
+                <a href={`/pokemon/${data.id}?name=${data.name}&image=${data.image}&typeOne=${data.types[0].type.name}&typeTwo=${typeTwo}`}> {data.name}</a>
+            </h4>
+            <img src={data.image} alt="" />
+            <div className="types">
+                {data.types.map(item => <p key={item.slot}>{item.type.name}</p>)}
+            </div>
+
         </div>
     )
 }
