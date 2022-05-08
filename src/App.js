@@ -1,17 +1,24 @@
-import React, {useState} from 'react'
-import Form from './Form'
-import List from './List'
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+
+import Nav from './Nav'
+import Home from './Home'
+import Create from './Create'
+import Detail from './Detail'
 
 function App() {
 
-  const [value, setValue] = useState('');
-  const [pokemons, setPokemons] = useState([]);
-
   return (
-    <main>
-      <Form value={value} setValue={setValue} pokemons={pokemons} setPokemons={setPokemons} />
-      <List pokemons={pokemons} />
-    </main>
+    <>
+      <Nav />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new" element={<Create />} />
+          <Route path="/pokemon/:id" element={<Detail />} />
+        </Routes>
+      </main>
+    </>
   )
 }
 
